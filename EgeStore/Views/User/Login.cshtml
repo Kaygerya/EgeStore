@@ -1,0 +1,32 @@
+﻿@model EgeStore.Models.Users.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="col-md-6">
+    <div class="panel panel-info">
+        <h3 class="bg-info">Login</h3>
+        <div class="panel-body">
+            <form asp-controller="User" asp-action="login" class="form-horizontal">
+                @if (!Model.IsSuccess)
+                {
+                    <div><span class="text-danger">@Model.Error</span></div>
+                }
+                <div class="form-group">
+                    <label asp-for="@Model.Username" class="control-label"></label>
+                    <input asp-for="@Model.Username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Password" class="control-label"></label>
+                    <input asp-for="@Model.Password" type="password" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <a asp-controller="User" asp-action="Register" class="btn btn-info">Register</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
