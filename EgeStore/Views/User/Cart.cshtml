@@ -1,0 +1,164 @@
+﻿@model EgeStore.Models.Users.PaymentModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="col-md-6">
+    <div class="panel panel-info">
+        <h3 class="bg-info">Login</h3>
+        <div class="panel-body">
+            @foreach (var item in Model.Items)
+            {
+                <div class="row">
+                    <div class=" col-sm-4"><img class="img-responsive" src="@item.ImageUrl" style="width:100%;" /></div><div class=" col-sm-4">@item.Name</div><div class=" col-sm-2">@item.Price TL</div><div class=" col-sm-2">@item.Quantity Adet</div>
+                </div>
+            }
+
+        </div>
+
+        <form asp-controller="User" asp-action="Pay" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label asp-for="@Model.CardNumber" class="control-label"></label>
+                <input asp-for="@Model.CardNumber" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.LastUsageMonth" class="control-label col-md-6"></label>
+                <input asp-for="@Model.LastUsageMonth" class="form-control col-md-4" /><input asp-for="@Model.LastUsageYear" class="form-control col-md-4" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Cvv" class="control-label"></label>
+                <input asp-for="@Model.Cvv" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Öde</button>
+            </div>
+        </form>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Card Number</th>
+                    <th>Bank</th>
+                    <th>Card Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5890040000000016</td>
+                    <td>Akbank</td>
+                    <td>Master Card (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5526080000000006</td>
+                    <td>Akbank</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+                <tr>
+                    <td>4766620000000001</td>
+                    <td>Denizbank</td>
+                    <td>Visa (Debit)</td>
+                </tr>
+                <tr>
+                    <td>4603450000000000</td>
+                    <td>Denizbank</td>
+                    <td>Visa (Credit)</td>
+                </tr>
+                <tr>
+                    <td>4729150000000005</td>
+                    <td>Denizbank Bonus</td>
+                    <td>Visa (Credit)</td>
+                </tr>
+                <tr>
+                    <td>4987490000000002</td>
+                    <td>Finansbank</td>
+                    <td>Visa (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5311570000000005</td>
+                    <td>Finansbank</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+                <tr>
+                    <td>9792020000000001</td>
+                    <td>Finansbank</td>
+                    <td>Troy (Debit)</td>
+                </tr>
+                <tr>
+                    <td>9792030000000000</td>
+                    <td>Finansbank</td>
+                    <td>Troy (Credit)</td>
+                </tr>
+                <tr>
+                    <td>5170410000000004</td>
+                    <td>Garanti Bankası</td>
+                    <td>Master Card (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5400360000000003</td>
+                    <td>Garanti Bankası</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+                <tr>
+                    <td>374427000000003</td>
+                    <td>Garanti Bankası</td>
+                    <td>American Express</td>
+                </tr>
+                <tr>
+                    <td>4475050000000003</td>
+                    <td>Halkbank</td>
+                    <td>Visa (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5528790000000008</td>
+                    <td>Halkbank</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+                <tr>
+                    <td>4059030000000009</td>
+                    <td>HSBC Bank</td>
+                    <td>Visa (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5504720000000003</td>
+                    <td>HSBC Bank</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+                <tr>
+                    <td>5892830000000000</td>
+                    <td>Türkiye İş Bankası</td>
+                    <td>Master Card (Debit)</td>
+                </tr>
+                <tr>
+                    <td>4543590000000006</td>
+                    <td>Türkiye İş Bankası</td>
+                    <td>Visa (Credit)</td>
+                </tr>
+                <tr>
+                    <td>4910050000000006</td>
+                    <td>Vakıfbank</td>
+                    <td>Visa (Debit)</td>
+                </tr>
+                <tr>
+                    <td>4157920000000002</td>
+                    <td>Vakıfbank</td>
+                    <td>Visa (Credit)</td>
+                </tr>
+                <tr>
+                    <td>5168880000000002</td>
+                    <td>Yapı ve Kredi Bankası</td>
+                    <td>Master Card (Debit)</td>
+                </tr>
+                <tr>
+                    <td>5451030000000000</td>
+                    <td>Yapı ve Kredi Bankası</td>
+                    <td>Master Card (Credit)</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+

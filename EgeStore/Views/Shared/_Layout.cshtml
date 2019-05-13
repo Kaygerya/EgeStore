@@ -12,7 +12,13 @@
         <div class="container">
             <div class="navbar-header">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">EgeStore</a>
-
+                @{
+                    var isAdmin = Convert.ToBoolean(HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(k => k.Type == System.Security.Claims.ClaimTypes.Role).Value);
+                    if (isAdmin)
+                    {
+                        <a href="/Admin/Product/Index">+ Add Product</a>
+                    }
+                }
             </div>
             <div class="navbar-right">
                 <a class=" btn btn-sm btn-danger" asp-controller="User" asp-action="logout"><i class="glyphicon glyphicon-remove"></i>Logout</a>

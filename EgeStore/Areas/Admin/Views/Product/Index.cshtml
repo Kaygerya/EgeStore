@@ -1,0 +1,36 @@
+﻿@model List<EgeStore.Areas.Admin.Models.ProductModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<button type="button" class="btn btn-info" onclick="javascript: window.location.href='@Url.Action("Create", "Product", new { Area ="Admin"})'">+ ADD</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1;}
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td><img src="@product.GetPath()" style="width:100px;" /></td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>
+                    <a class="btn btn-warning"  href="@Url.Action("Edit", "Product", new { Area ="Admin", Id= product.Id})">Edit</a>
+                    <a   class="btn btn-danger"  href="@Url.Action("Delete", "Product", new { Area ="Admin", Id= product.Id})">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

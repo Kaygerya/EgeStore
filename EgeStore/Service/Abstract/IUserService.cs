@@ -16,6 +16,8 @@ namespace EgeStore.Service.Abstract
 
         void Insert(User user);
 
+        void Update(User user);
+
         Entity RegisterUser(RegisterModel model);
 
         Entity LoginUser(LoginModel model);

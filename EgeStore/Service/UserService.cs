@@ -33,6 +33,13 @@ namespace EgeStore.Service
             context.Users.InsertOne(user);
         }
 
+
+        public void Update(User user)
+        {
+            MongoContext context = new MongoContext();
+            context.Users.ReplaceOne<User>(k=> k.Id == user.Id,user);
+        }
+
         public Entity RegisterUser(RegisterModel model)
         {
 
@@ -89,6 +96,7 @@ namespace EgeStore.Service
                 return model;
             }
             model.Id = user.Id;
+            model.IsAdmin = user.IsAdmin;
             return model;
         }
     }

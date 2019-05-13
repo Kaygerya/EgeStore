@@ -23,5 +23,10 @@ namespace EgeStore.Data
         {
             get { return _database.GetCollection<User>("users"); }
         }
+
+        public IMongoCollection<Product> Products
+        {
+            get { return _database.GetCollection<Product>("products"); }
+        }
     }
 }
