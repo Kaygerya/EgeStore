@@ -1,4 +1,5 @@
-﻿using EgeStore.Data.Models;
+﻿using EgeStore.Data.Base;
+using EgeStore.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace EgeStore.Models.Users
         public decimal Price { get; set; }
     }
 
-    public class PaymentModel
+    public class PaymentModel : Entity
     {
         public PaymentModel()
         {
@@ -25,5 +26,7 @@ namespace EgeStore.Models.Users
         public string LastUsageMonth { get; set; }
         public string LastUsageYear { get; set; }
         public string Cvv { get; set; }
+
+        public string SuccessMessage { get; set; }
     }
 }

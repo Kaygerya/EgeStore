@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var userId = HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(k => k.Type == System.Security.Claims.ClaimTypes.Name).Value;
+    var user = _userService.GetUserById(userId);
+
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,25 +22,43 @@
                     var isAdmin = Convert.ToBoolean(HttpContextAccessor.HttpContext.User.Claims.FirstOrDefault(k => k.Type == System.Security.Claims.ClaimTypes.Role).Value);
                     if (isAdmin)
                     {
-                        <a href="/Admin/Product/Index">+ Add Product</a>
+                        <a href="/Admin/Product/Index">Manage Products</a>
                     }
                 }
             </div>
             <div class="navbar-right">
+                <div class="badge"> @user.CartItemCount</div>
                 <a class=" btn btn-sm btn-danger" asp-controller="User" asp-action="logout"><i class="glyphicon glyphicon-remove"></i>Logout</a>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - EgeStore</p>
-        </footer>
+    <div class="row">
+        @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+        <div class="col-sm-2 border border-warning">
+            <a asp-controller="Home" asp-action="Index" asp-area="" class="btn btn-block btn-info">Ürünler</a>
+            <a asp-controller="User" asp-action="Cart"  asp-area="" class="btn btn-block btn-warning">Sepetim</a>
+            <a asp-controller="User" asp-action="MyOrders"  asp-area="" class="btn btn-block btn-success">Siparişlerim</a>
+        </div>
+        }
+        @{ 
+            string mainCol = HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated ?  "col-sm-10" : "col-sm-12";
+        }
+        <div class="@mainCol" style="min-height:700px;">
+            @RenderBody()
+        </div>
+        <div class="col-sm-12">
+            <hr />
+            <footer>
+                <p>&copy; 2019 - EgeStore</p>
+            </footer>
+        </div>
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)

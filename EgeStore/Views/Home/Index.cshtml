@@ -3,15 +3,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-<div class="row">
-    @foreach (var product in Model)
-    {
-    <div class="col-md-4 col-sm-4 col-lg-4">
-        <img src="@product.GetPath()" class="img-responsive" style="width:100%;" />
-        <div class="text-info">@product.Name</div>
-        <div class="text-info">@product.Price TL</div>
-        <a href="@Url.Action("AddProductToCart","User", new { id= product.Id})" class="btn btn-info float-right">+ ADD</a>
+<div class="col-md-6">
+    <div class="panel panel-info">
+        <h3 class="bg-success">Ürünler</h3>
+        <div class="panel-body">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <img src="@product.GetPath()" class="img-responsive" style="width:100%;" />
+                        <div class="text-info">@product.Name</div>
+                        <div class="text-info">@product.Price TL</div>
+                        <a href="@Url.Action("AddProductToCart","User", new { id= product.Id})" class="btn btn-info float-right">+ ADD</a>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
-    }
 </div>

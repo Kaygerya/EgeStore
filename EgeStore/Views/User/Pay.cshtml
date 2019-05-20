@@ -1,8 +1,16 @@
-﻿
+﻿@model EgeStore.Models.Users.PaymentModel
 @{
     ViewData["Title"] = "Pay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Pay</h2>
+<div class="col-md-6">
+    <div class="panel panel-info">
+        <h3 class="bg-info">Spiariş Başarılı</h3>
+        <div class="panel-body">
+            @Model.SuccessMessage
+        </div>
+        </div>
+    </div>
+          
 

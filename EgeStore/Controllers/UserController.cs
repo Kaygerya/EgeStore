@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Armut.Iyzipay;
 using Armut.Iyzipay.Model;
 using Armut.Iyzipay.Request;
+using EgeStore.Data.Models;
 using EgeStore.Models.Users;
 using EgeStore.Service.Abstract;
 using Microsoft.AspNetCore.Authentication;
@@ -19,10 +20,13 @@ namespace EgeStore.Controllers
 
         private readonly IProductService _productService;
 
-        public UserController(IUserService userService, IProductService productService)
+        private readonly IOrderService _orderService;
+
+        public UserController(IUserService userService, IProductService productService, IOrderService orderService)
         {
             _userService = userService;
             _productService = productService;
+            _orderService = orderService;
         }
 
         public IActionResult Index()
@@ -53,7 +57,7 @@ namespace EgeStore.Controllers
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
                 HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -116,7 +120,7 @@ namespace EgeStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Cart()
+        public IActionResult Cart(PaymentModel paymentModel = null)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(k => k.Type == ClaimTypes.Name).Value;
             var user = _userService.GetUserById(userId);
@@ -136,13 +140,16 @@ namespace EgeStore.Controllers
                         item.Price = product.Price;
                         model.Add(item);
                     }
-
                 }
             }
-            PaymentModel paymentModel = new PaymentModel();
+            if (model == null)
+            {
+                paymentModel = new PaymentModel();
+            }
             paymentModel.Items = model;
             return View(paymentModel);
         }
+
         [HttpPost]
         //https://github.com/EmreKarahan/Iyzipay.Core
         //https://sandbox-merchant.iyzipay.com/transactions
@@ -233,8 +240,8 @@ namespace EgeStore.Controllers
                     if (product != null)
                     {
                         BasketItem firstBasketItem = new BasketItem();
-                        firstBasketItem.Id = "BI101";
-                        firstBasketItem.Name = "Binocular";
+                        firstBasketItem.Id = product.Id;
+                        firstBasketItem.Name = product.Name;
                         firstBasketItem.Category1 = "Collectibles";
                         firstBasketItem.Category2 = "Accessories";
                         firstBasketItem.ItemType = BasketItemType.PHYSICAL.ToString();
@@ -247,7 +254,39 @@ namespace EgeStore.Controllers
             request.BasketItems = basketItems;
 
             Payment payment = Payment.Create(request, options);
-            return View();
+            if(payment.Status == Status.SUCCESS.ToString())
+            {
+                model.SuccessMessage = "Alışverişiniz başarılı";
+
+                //sepeti boşalt
+                user.Cart = new List<Data.Models.ShoppingCartItem>();
+                _userService.Update(user);
+
+                Order order = new Order();
+                order.OrderTotal = total;
+                order.Address = shippingAddress;
+                order.BasketItems = basketItems;
+                order.UserId = user.Id;
+                _orderService.Insert(order);
+
+                return View(model);
+            }
+            else
+            {
+                model.Error = payment.ErrorMessage;
+                return RedirectToAction("Cart", model);
+            }
+
+        }
+
+        public IActionResult MyOrders()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(k => k.Type == ClaimTypes.Name).Value;
+            var user = _userService.GetUserById(userId);
+            List<Order> orders = _orderService.GetOrdersByUserId(user.Id);
+            return View(orders);
+
+
         }
         
     }

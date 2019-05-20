@@ -30,7 +30,7 @@ namespace EgeStore
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IProductService, ProductService>();
-
+            services.AddSingleton<IOrderService, OrderService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;

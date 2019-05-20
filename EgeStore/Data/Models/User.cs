@@ -26,6 +26,13 @@ namespace EgeStore.Data.Models
         public bool IsAdmin { get; set; }
 
         public List<ShoppingCartItem> Cart { get; set; }
+
+        public int CartItemCount { get {
+                if (this.Cart == null)
+                    return 0;
+
+                return Cart.Sum(k => k.Quantity);
+            } }
     }
 
     public class ShoppingCartItem

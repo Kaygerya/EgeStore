@@ -1,0 +1,60 @@
+﻿@model List<EgeStore.Data.Models.Order>
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Count == 0)
+{
+<span> Hiç siparişiniz yok</span>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Order Address </th>
+            <th scope="col">Items</th>
+            <th scope="col">Order Total</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1;}
+        @foreach (var order in Model)
+        {
+        <tr>
+            <td>@i</td>
+            <td></td>
+            <td>@order.AddressString()</td>
+            <td>
+                <div class="row">
+                    <div class="col-sm-6">
+                        Ad
+                    </div>
+                    <div class="col-sm-3">
+                        Birim Fiyat
+                    </div>
+                </div>
+                @foreach (var bi in order.BasketItems)
+                {
+                    <div class="row">
+                        <div class="col-sm-6">
+                            @bi.Name
+                        </div>
+                        <div class="col-sm-3">
+                            @bi.Price
+                        </div>
+                    </div>
+                }
+            </td>
+            <td>@order.OrderTotal</td>
+            <td>
+                <a class="btn btn-warning" href="@Url.Action("OrderDetail", "User", new { Id = order.Id })">Edit</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+            }
