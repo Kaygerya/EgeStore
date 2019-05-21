@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp2.0\EgeStore.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp2.0\EgeStore.deps.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\EgeStore.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\EgeStore.runtimeconfig.json" />
+    <Content Include="obj\Debug\netcoreapp2.0\EgeStore.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Armut.Iyzipay" Version="2.5.0" />
     <PackageReference Include="IyzipayCore" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
@@ -20,6 +32,60 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\images\Products\" />
     <Folder Include="wwwroot\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Product\NotAuthorize.cshtml" />
+    <None Include="bin\Debug\netcoreapp2.0\EgeStore.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\EgeStore.pdb" />
+    <None Include="EgeStore.csproj" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.dll" />
+    <None Include="obj\Debug\netcoreapp2.0\EgeStore.pdb" />
+    <None Include="obj\EgeStore.csproj.nuget.cache" />
+    <None Include="obj\EgeStore.csproj.nuget.g.props" />
+    <None Include="obj\EgeStore.csproj.nuget.g.targets" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Product\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LayoutLogin.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\User\Cart.cshtml" />
+    <None Include="Views\User\Login.cshtml" />
+    <None Include="Views\User\MyOrders.cshtml" />
+    <None Include="Views\User\Pay.cshtml" />
+    <None Include="Views\User\Register.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
 </Project>

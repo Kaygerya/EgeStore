@@ -288,6 +288,13 @@ namespace EgeStore.Controllers
 
 
         }
-        
+
+        [HttpGet]
+        public IActionResult UserCartCount()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(k => k.Type == ClaimTypes.Name).Value;
+            var user = _userService.GetUserById(userId);
+            return Content(user.CartItemCount.ToString());
+        }
     }
 }

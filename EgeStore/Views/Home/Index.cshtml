@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="col-md-6">
     <div class="panel panel-info">
         <h3 class="bg-success">Ürünler</h3>
@@ -14,10 +13,37 @@
                         <img src="@product.GetPath()" class="img-responsive" style="width:100%;" />
                         <div class="text-info">@product.Name</div>
                         <div class="text-info">@product.Price TL</div>
-                        <a href="@Url.Action("AddProductToCart","User", new { id= product.Id})" class="btn btn-info float-right">+ ADD</a>
+                        <a href="javascript:void(0);" onclick="AddToCart('@product.Id')" class="btn btn-info float-right">+ ADD</a>
                     </div>
+
+                    //
                 }
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function AddToCart(productId) {
+        $.ajax({
+            method: "GET",
+            url: '@Url.Action("AddProductToCart","User")' + "?id=" + productId
+        })
+        .done(function (msg) {
+            alert("Ürün Sepete Eklendi");
+            UpdateCart();
+        });
+    }
+
+    function UpdateCart() {
+        $.ajax({
+            method: "GET",
+            url: '@Url.Action("UserCartCount", "User")'
+        })
+            .done(function (msg) {
+              $("#CartItemCount").html(msg);
+        });
+
+    }
+
+
+</script>
